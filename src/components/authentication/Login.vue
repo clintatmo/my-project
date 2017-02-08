@@ -31,7 +31,8 @@
         },
         methods: {
             login: function () {
-              this.$router.push('/newsfeed');
+              alertify.success("Success! You can now login with your email and password");
+              this.$router.push('/news-feed');
             }
         }
     }

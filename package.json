@@ -12,6 +12,7 @@
     "alertifyjs": "^1.9.0",
     "bootstrap": "^4.0.0-alpha.6",
     "vue": "^2.1.10",
+    "vue-resource": "^1.2.0",
     "vue-router": "^2.2.0"
   },
   "devDependencies": {

@@ -40,8 +40,21 @@
         name: 'dashboard',
         components: {
         },
-        created: function () {
-
+        data: function () {
+          return {
+          }
+        },
+        computed: {
+          user: function () {
+            return null;
+          }
+        },
+        methods: {
+          logout: function () {
+            this.user = {};
+            alertify.success("You have been logged out!");
+            this.$router.push('/auth/login');
+          }
         }
     }
 </script>

@@ -12,7 +12,7 @@ import NewsFeed from '../components/news_feed/NewsFeed.vue';
 import NewsFeedNew from '../components/news_feed/new/NewsFeedNew.vue';
 import NewsFeedHistory from '../components/news_feed/history/NewsFeedHistory.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -27,11 +27,13 @@ export default new Router({
           component: Settings,
           children: [{
             path: 'admin',
-            component: SettingsAdmin
+            component: SettingsAdmin,
+            meta: { requiresAuth: true }
           },
             {
               path: 'user',
-              component: SettingsUser
+              component: SettingsUser,
+              meta: { requiresAuth: true }
             }]
         },
         {
@@ -40,11 +42,13 @@ export default new Router({
           component: NewsFeed,
           children: [{
             path: 'new',
-            component: NewsFeedNew
+            component: NewsFeedNew,
+            meta: { requiresAuth: true }
           },
             {
               path: 'history',
-              component: NewsFeedHistory
+              component: NewsFeedHistory,
+              meta: { requiresAuth: true }
             }]
         }
       ]
