@@ -12,8 +12,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
-                    <li><router-link to="/news-feed" exact><i class="fa fa-newspaper-o"></i> News feed</router-link></a></li>
-                    <li><router-link to="/settings" exact><i class="fa fa-cog"></i> Settings</router-link></a></li>
+                    <router-link tag="li" to="/news-feed"><a><i class="fa fa-newspaper-o"></i> News feed</a></router-link>
+                    <router-link tag="li" to="/settings"><a><i class="fa fa-cog"></i> Settings</a></router-link>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">user <span class="caret"></span></a>
                       <ul class="dropdown-menu">

@@ -74,6 +74,6 @@ body {
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
-  background-color: #cccccc;
-  border-color: #cccccc;
+  background-color: #333333;
+  border-color: #333333;
 }
