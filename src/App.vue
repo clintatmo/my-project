@@ -10,4 +10,4 @@ export default {
 }
 </script>
 
-<!--<style src="./assets/beeper.css"></style>-->
+<style src="./assets/style.css"></style>

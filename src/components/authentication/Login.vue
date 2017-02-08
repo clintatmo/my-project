@@ -9,7 +9,7 @@
 
         <hr>
 
-        <button class="btn btn-raised btn-primary"
+        <button class="btn btn-lg btn-primary btn-block m-b-15"
             @click="login">Sign in</button>
 
         <p class="text-center">
@@ -31,11 +31,7 @@
         },
         methods: {
             login: function () {
-                this.$http.post("/auth", this.user)
-                        .then(function (res) {
-                            this.$auth.setToken(res.body.token, Date.now() + 14400000 ); // + 4 hours
-                            this.$router.push('/newsfeed');
-                        })
+              this.$router.push('/newsfeed');
             }
         }
     }

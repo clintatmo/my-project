@@ -5,7 +5,12 @@ import Auth from '../components/authentication/Authentication.vue';
 import Login from '../components/authentication/Login.vue';
 import Register from '../components/authentication/Register.vue';
 import Dashboard from '../components/dashboard/Dashboard.vue';
-import Settings from '../components/dashboard/Settings.vue';
+import Settings from '../components/settings/Settings.vue';
+import SettingsAdmin from '../components/settings/admin/SettingsAdmin.vue';
+import SettingsUser from '../components/settings/user/SettingsUser.vue';
+import NewsFeed from '../components/news_feed/NewsFeed.vue';
+import NewsFeedNew from '../components/news_feed/new/NewsFeedNew.vue';
+import NewsFeedHistory from '../components/news_feed/history/NewsFeedHistory.vue';
 
 Vue.use(Router)
 
@@ -14,11 +19,33 @@ export default new Router({
     {
       path: '/',
       component: Dashboard,
-      redirect: '/auth/login',
+      redirect: 'news-feed/new',
       children: [
         {
           path: 'settings',
-          component: Settings
+          redirect: 'settings/user',
+          component: Settings,
+          children: [{
+            path: 'admin',
+            component: SettingsAdmin
+          },
+            {
+              path: 'user',
+              component: SettingsUser
+            }]
+        },
+        {
+          path: 'news-feed',
+          redirect: 'news-feed/new',
+          component: NewsFeed,
+          children: [{
+            path: 'new',
+            component: NewsFeedNew
+          },
+            {
+              path: 'history',
+              component: NewsFeedHistory
+            }]
         }
       ]
     },

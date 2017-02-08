@@ -1,35 +1,47 @@
 <template>
     <div id="dashWrap">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-md-offset-1 col-sm-5">
-                    <sidebar></sidebar>
+          <div class="row">
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">iProject</a>
                 </div>
 
-                <div class="col-md-7 col-sm-7 mainView">
-                    <transition name="fade">
-                        <router-view></router-view>
-                    </transition>
-                </div>
-            </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><router-link to="/news-feed" exact><i class="fa fa-newspaper-o"></i> News feed</router-link></a></li>
+                    <li><router-link to="/settings" exact><i class="fa fa-cog"></i> Settings</router-link></a></li>
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">user <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" @click.prevent="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+          </div>
+          <div class="row">
+            <transition name="fade">
+              <router-view></router-view>
+            </transition>
+          </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Sidebar from 'components/dashboard/Sidebar.vue';
 
     export default {
         name: 'dashboard',
         components: {
-            sidebar: Sidebar
         },
         created: function () {
-            if (this.$auth.loggedIn()) {
 
-            } else {
-                this.$store.commit('clearCurrentUser');
-            }
         }
     }
 </script>
@@ -37,15 +49,9 @@
 <style scoped>
     #dashWrap {
         min-height: 100%;
-        padding-top: 50px;
-        background: #42275a; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to left, #42275a , #734b6d); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to left, #42275a , #734b6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
-
-    .mainView {
-        background: #fff;
-        border-radius: 6px;
-        padding: 20px;
+        padding-top: 5px;
+        background: #748B9E; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, #2E7A91 , #48849C); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, #2E7A91 , #48849C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
 </style>

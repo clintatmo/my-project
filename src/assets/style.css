@@ -3,9 +3,9 @@ body, html {
 }
 
 body {
-    background: #42275a; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #42275a , #734b6d); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #42275a , #734b6d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #748B9E; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #2E7A91 , #48849C); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #2E7A91 , #48849C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .fade-enter-active {
@@ -71,4 +71,9 @@ body {
 
 .no-margin {
     margin: 0;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+  background-color: #cccccc;
+  border-color: #cccccc;
 }
