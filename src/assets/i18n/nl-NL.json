@@ -1,0 +1,9 @@
+{
+  "global": {
+    "language": "NEDERLANDS"
+  },
+  "message": {
+    "hello": "Hallo",
+    "world": "Wereld"
+  }
+}
