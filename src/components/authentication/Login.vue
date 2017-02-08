@@ -31,7 +31,7 @@
         },
         methods: {
             login: function () {
-              alertify.success("Success! You can now login with your email and password");
+              alertify.success("Logged in!");
               this.$router.push('/news-feed');
             }
         }
