@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-center">Login</h3>
+        <h3 class="text-center">{{ $t('global.login') }}</h3>
 
         <input type="text" class="form-control m-b-15" placeholder="Username"
                v-model="user.username">
