@@ -25,28 +25,7 @@
 <script>
     export default {
         name: 'sidebar',
-        created: function () {
-
-        },
-        data: function () {
-            return {
-
-            }
-        },
-        computed: {
-            user: function () {
-                return null;
-            }
-        },
         methods: {
-            beep: function () {
-                this.$http.post('/beeps', {text: this.newBeep})
-                        .then(function (res) {
-                            this.$root.$emit('newBeep', res.data);
-                            this.newBeep = "";
-                            alertify.success("Beep published!");
-                        })
-            },
             logout: function () {
                 this.$auth.destroyToken();
                 this.user = {};

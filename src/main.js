@@ -2,14 +2,17 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import Router from './router'
 import VueResource from 'vue-resource';
 import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
+import Auth from './plugins/AuthPlugin';
+import Store from './store/VuexStore';
 
 
 Vue.use(VueResource);
 Vue.use(Vuex);
+Vue.use(Auth);
 
 // initialize the vuex store using the vuex module. note that you can change the
 //  name of the module if you wish
@@ -65,15 +68,17 @@ Vue.http.interceptors.push(function(request, next) {
 });
 
 //configure route guards
-/*router.beforeEach(function (to, from, next)  {
+Router.beforeEach(function (to, from, next)  {
   //prevent access to 'requiresGuest' routes;
-  if (to.matched.some(function(record) { return record.meta.requiresGuest }))
+  if (to.matched.some(function(record) { return record.meta.requiresGuest })
+    && Vue.auth.loggedIn())
   {
     next({
       path: '/news-feed'
     });
   }
-  else if (to.matched.some(function(record) { return record.meta.requiresAuth }))
+  else if (to.matched.some(function(record) { return record.meta.requiresAuth })
+    && !Vue.auth.loggedIn())
   {
     next({
       path: '/auth/login',
@@ -83,12 +88,13 @@ Vue.http.interceptors.push(function(request, next) {
   else {
     next(); // make sure to always call next()!
   }
-});*/
+});
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router: Router,
+  store: Store,
   template: '<App/>',
   components: { App },
   methods: {

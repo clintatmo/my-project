@@ -49,17 +49,31 @@
         },
         data: function () {
           return {
+            loggedIn: this.$auth.loggedIn()
           }
         },
         computed: {
           user: function () {
-            return null;
+            return this.$store.state.currentUser;
+          }
+        },
+        created: function () {
+          if (this.$auth.loggedIn()) {
+            this.$http.get('/users/me')
+              .then(function (res) {
+                this.$store.commit('setCurrentUser', res.body);
+              })
+              .catch(function (res) {
+                this.$store.commit('clearCurrentUser');
+              });
+          } else {
+            this.$store.commit('clearCurrentUser');
           }
         },
         methods: {
           logout: function () {
+            this.$auth.destroyToken();
             this.user = {};
-            alertify.success("You have been logged out!");
             this.$router.push('/auth/login');
           }
         }
