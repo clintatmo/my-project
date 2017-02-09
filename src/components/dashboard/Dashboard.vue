@@ -15,10 +15,10 @@
                     <router-link tag="li" to="/news-feed"><a><i class="fa fa-newspaper-o"></i> News feed</a></router-link>
                     <router-link tag="li" to="/settings"><a><i class="fa fa-cog"></i> Settings</a></router-link>
                     <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $t('hello.world', {'type': 'nice'}) }}<span class="caret"></span></a>
+                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $t('global.language', {'type': 'nice'}) }}<span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="#" @click.prevent="switchLanguage('en-US')"><i class="fa fa-power-off"></i> English</a></li>
-                        <li><a href="#" @click.prevent="switchLanguage('nl-NL')"><i class="fa fa-power-off"></i> Dutch</a></li>
+                        <li><a href="#" @click.prevent="$i18n.set('en')"><i class="fa fa-flag-o"></i> English</a></li>
+                        <li><a href="#" @click.prevent="$i18n.set('nl')"><i class="fa fa-flag-o"></i> Dutch</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">

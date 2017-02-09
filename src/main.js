@@ -23,13 +23,16 @@ Vue.use(vuexI18n.plugin, store);
 
 const translationsEn = {
   "content": "This is some {type} content",
-  "hello": {
-    "world":"YO"
+  "global": {
+    "language":"Language"
   }
 };
 
 const translationsNl = {
-  "content": "Dies ist ein toller Inhalt"
+  "content": "Dies ist ein toller Inhalt",
+  "global": {
+    "language":"Taal"
+  }
 };
 
 // add translations directly to the application
@@ -88,9 +91,6 @@ new Vue({
   router,
   template: '<App/>',
   components: { App },
-  beforeCompile: function() {
-    this.$setLanguage("en-US");
-  },
   methods: {
     switchLanguage: function(lang) {
       this.$setLanguage(lang);
