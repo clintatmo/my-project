@@ -6,6 +6,19 @@
         <router-link to="/settings/admin" class="list-group-item"><span class="badge">0</span>Admin</router-link>
         <router-link to="/settings/user" class="list-group-item"><span class="badge">2</span>User</router-link>
       </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
+                            </span>Reports</a>
+          </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse">
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
