@@ -3,5 +3,7 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API: '"http://localhost:9090"'
+  API: '"http://localhost:4500"',
+  AUTH_USERNAME: '"clientapp"',
+  AUTH_PASSWORD: '"secret"',
 })

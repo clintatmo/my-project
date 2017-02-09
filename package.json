@@ -11,6 +11,7 @@
   "dependencies": {
     "@websanova/vue-auth": "^2.6.1-beta",
     "alertifyjs": "^1.9.0",
+    "base-64": "^0.1.0",
     "bootstrap": "^4.0.0-alpha.6",
     "vue": "^2.1.10",
     "vue-i18n-plugin": "^0.2.2",

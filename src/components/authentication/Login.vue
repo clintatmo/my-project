@@ -31,7 +31,11 @@
         },
         methods: {
             login: function () {
-              this.$http.post("/auth", this.user)
+              this.$http.post("/oauth/token?grant_type=password&username=clint@&password=clint", {
+                headers: {
+                  'Authorization': 'Basic Y2xpZW50YXBwOnNlY3JldA==',
+                  'Accept': 'application/json'
+                }})
                 .then(function (res) {
                   this.$auth.setToken(res.body.token, Date.now() + 14400000 ); // + 4 hours
                   this.$router.push('/news-feed');
