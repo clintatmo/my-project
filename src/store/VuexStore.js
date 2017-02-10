@@ -5,14 +5,35 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        currentUser: {}
+        currentUser: {},
+        authToken:{},
+        authTokenExpiration:{},
+        roles:{}
     },
     mutations: {
-        setCurrentUser: function (state, user) {
-            state.currentUser = user;
-        },
-        clearCurrentUser: function (state) {
-            state.currentUser = {};
-        },
+      setCurrentUser: function (state, user) {
+          state.currentUser = user;
+      },
+      clearCurrentUser: function (state) {
+          state.currentUser = {};
+      },
+      setAuthToken: function (state, authToken) {
+          state.authToken = authToken;
+      },
+      clearAuthToken: function (state) {
+          state.authToken = {};
+      },
+      setAuthTokenExpiration: function (state, authTokenExpiration) {
+          state.authTokenExpiration = authTokenExpiration;
+      },
+      clearAuthTokenExpiration: function (state) {
+          state.authTokenExpiration = {};
+      },
+      setRoles: function (state, roles) {
+          state.roles = roles;
+      },
+      clearRoles: function (state) {
+          state.roles = {};
+      }
     }
 })

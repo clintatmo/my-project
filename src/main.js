@@ -39,8 +39,6 @@ alertify.defaults.notifier.position = 'top-right';
 var base64 = require('base-64');
 
 Vue.http.headers.common['Authorization'] = 'Basic '+base64.encode(process.env.AUTH_USERNAME+":"+process.env.AUTH_PASSWORD);
-//Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:4500';
-//Vue.http.headers.common['Access-Control-Allow-Method'] = 'POST, GET, OPTIONS, DELETE';
 
 Vue.http.options.xhr = {withCredentials: true};
 Vue.http.options.emulateJSON = true;
@@ -58,7 +56,7 @@ Vue.http.interceptors.push(function(request, next) {
   next(function(response) {
     if (response.status == 400) {
 
-        alertify.error(response.data);
+        alertify.error(response.data.error_description);
 
       /*response.body.errors.forEach(function (e) {
         alertify.error(e);
@@ -81,8 +79,7 @@ Router.beforeEach(function (to, from, next)  {
     && !Vue.auth.loggedIn())
   {
     next({
-      path: '/auth/login',
-      query: { redirect: to.fullPath }
+      path: '/auth/login'
     });
   }
   else {
@@ -97,9 +94,5 @@ new Vue({
   store: Store,
   template: '<App/>',
   components: { App },
-  methods: {
-    switchLanguage: function(lang) {
-      this.$setLanguage(lang);
-    }
-  }
+  methods: {}
 })

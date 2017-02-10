@@ -1,12 +1,23 @@
+import Store from '../store/VuexStore';
+
 var AuthPlugin = {
-    setToken: function (token, expiration) {
+    setToken: function (token, expiration, username, roles) {
         localStorage.setItem('authToken', token);
         localStorage.setItem('authTokenExpiration', expiration);
+        localStorage.setItem('roles', roles);
+      //Store.commit('setAuthToken', token);
+      //Store.commit('setAuthTokenExpiration', expiration);
+      Store.commit('setCurrentUser', username);
+      //Store.commit('setRoles', roles);
     },
 
     destroyToken: function () {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('authTokenExpiration');
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('authTokenExpiration');
+      //Store.commit('clearAuthToken');
+      //Store.commit('clearAuthTokenExpiration');
+      Store.commit('clearCurrentUser');
+      //Store.commit('clearRoles');
     },
 
     getToken: function () {

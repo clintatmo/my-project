@@ -22,7 +22,7 @@
                       </ul>
                     </li>
                     <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">user <span class="caret"></span></a>
+                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user}}<span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a href="#" @click.prevent="logout"><i class="fa fa-power-off"></i> Logout</a></li>
                       </ul>
@@ -59,22 +59,16 @@
         },
         created: function () {
           if (this.$auth.loggedIn()) {
-            this.$http.get('/users/me')
-              .then(function (res) {
-                this.$store.commit('setCurrentUser', res.body);
-              })
-              .catch(function (res) {
-                this.$store.commit('clearCurrentUser');
-              });
           } else {
             this.$store.commit('clearCurrentUser');
           }
         },
         methods: {
           logout: function () {
-            this.$auth.destroyToken();
-            this.user = {};
             this.$router.push('/auth/login');
+            /*this.$auth.destroyToken();
+            this.user = {};*/
+
           }
         }
     }

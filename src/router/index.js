@@ -19,7 +19,7 @@ export default new Router({
     {
       path: '/',
       component: Dashboard,
-      redirect: 'news-feed/new',
+      redirect: '/auth/login',
       children: [
         {
           path: 'settings',
