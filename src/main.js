@@ -38,18 +38,14 @@ alertify.defaults.notifier.position = 'top-right';
 
 var base64 = require('base-64');
 
-//Vue.http.headers.common['Authorization'] = 'Basic '+base64.encode(process.env.AUTH_USERNAME+":"+process.env.AUTH_PASSWORD);
-Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
+Vue.http.headers.common['Authorization'] = 'Basic '+base64.encode(process.env.AUTH_USERNAME+":"+process.env.AUTH_PASSWORD);
+//Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:4500';
 //Vue.http.headers.common['Access-Control-Allow-Method'] = 'POST, GET, OPTIONS, DELETE';
 
 Vue.http.options.xhr = {withCredentials: true};
 Vue.http.options.emulateJSON = true;
 
 Vue.http.interceptors.push(function(request, next) {
-
-/*  request.headers.set('Authorization', 'Basic ' + base64.encode(process.env.AUTH_USERNAME+":"+process.env.AUTH_PASSWORD));
-  request.headers.set('Access-Control-Allow-Origin', '*');
-  request.headers.set('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, remember-me');*/
 
   if (request.url[0] === '/') {
     request.url = process.env.API + request.url;
@@ -60,10 +56,13 @@ Vue.http.interceptors.push(function(request, next) {
   }
 
   next(function(response) {
-    if (response.status == 422) {
-      response.body.errors.forEach(function (e) {
+    if (response.status == 400) {
+
+        alertify.error(response.data);
+
+      /*response.body.errors.forEach(function (e) {
         alertify.error(e);
-      });
+      });*/
     }
   });
 });
