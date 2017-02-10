@@ -65,9 +65,9 @@
         },
         methods: {
           logout: function () {
+            this.$auth.destroyToken();
+            this.user = {};
             this.$router.push('/auth/login');
-            /*this.$auth.destroyToken();
-            this.user = {};*/
 
           }
         }
