@@ -27,16 +27,20 @@ var AuthPlugin = {
         if (!token || !expiration)
             return null;
 
-        if (Date.now() > parseInt(expiration)) {
-            this.destroyToken();
-            return null;
-        } else {
-            return token;
-        }
+        // ToDo
+        // if (Date.now() > parseInt(expiration)) {
+        //     this.destroyToken();
+        //     return null;
+        // } else {
+        //     return token;
+        // }
+
+        return token;
     },
 
     loggedIn: function () {
-        if (this.getToken())
+
+      if (this.getToken())
             return true;
         else
             return false;

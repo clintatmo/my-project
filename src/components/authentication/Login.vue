@@ -33,7 +33,7 @@
             login: function () {
               this.$http.post("/oauth/token?grant_type=password&username="+ this.user.username +"&password="+this.user.password,{})
                 .then(function (res) {
-                    console.log(res);
+                    //console.log(res);
                   this.$auth.setToken(res.data.access_token, Date.now() + res.data.expires_in, res.data.username, res.data.roles); // + 4 hours
                   this.$router.push('/news-feed');
                 })

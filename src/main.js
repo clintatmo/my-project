@@ -78,6 +78,8 @@ Router.beforeEach(function (to, from, next)  {
   else if (to.matched.some(function(record) { return record.meta.requiresAuth })
     && !Vue.auth.loggedIn())
   {
+
+    console.log(Vue.auth.loggedIn());
     next({
       path: '/auth/login'
     });
