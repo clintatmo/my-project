@@ -8,9 +8,9 @@ import Dashboard from '../components/dashboard/Dashboard.vue';
 import Settings from '../components/settings/Settings.vue';
 import SettingsAdmin from '../components/settings/admin/SettingsAdmin.vue';
 import SettingsUser from '../components/settings/user/SettingsUser.vue';
-import NewsFeed from '../components/news_feed/NewsFeed.vue';
-import NewsFeedNew from '../components/news_feed/new/NewsFeedNew.vue';
-import NewsFeedHistory from '../components/news_feed/history/NewsFeedHistory.vue';
+import NewsFeed from '../components/news-feed/NewsFeed.vue';
+import NewsFeedNew from '../components/news-feed/new/NewsFeedNew.vue';
+import NewsFeedHistory from '../components/news-feed/history/NewsFeedHistory.vue';
 
 Vue.use(Router);
 
