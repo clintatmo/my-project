@@ -3,8 +3,10 @@
       <div class="list-group">
         <router-link to="/news-feed/new" class="list-group-item"><span class="badge">14</span>New</router-link>
         <router-link to="/news-feed/history" class="list-group-item"><span class="badge">0</span>History</router-link>
-        <router-link to="/settings/admin" class="list-group-item"><span class="badge">0</span>Admin</router-link>
-        <router-link to="/settings/user" class="list-group-item"><span class="badge">2</span>User</router-link>
+        <router-link to="/settings/modules" class="list-group-item"><span class="badge">0</span>Modules</router-link>
+        <router-link to="/settings/privileges" class="list-group-item"><span class="badge">0</span>Privileges</router-link>
+        <router-link to="/settings/roles" class="list-group-item"><span class="badge">0</span>Roles</router-link>
+        <router-link to="/settings/users" class="list-group-item"><span class="badge">0</span>Users</router-link>
       </div>
       <div class="panel panel-default">
         <div class="panel-heading">

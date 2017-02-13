@@ -1,11 +1,11 @@
 <template>
-  <div id="settings-user">
+  <div id="settings-privileges">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">User settings</h3>
+        <h3 class="panel-title">Privileges</h3>
       </div>
       <div class="panel-body">
-        <h1>SETTINGS</h1>
+        <h1>PRIVILEGES</h1>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
   import Sidebar from 'components/dashboard/Sidebar.vue';
 
   export default {
-    name: 'settings-user',
+    name: 'settings-privileges',
     components:[{
       sidebar: Sidebar
     }],

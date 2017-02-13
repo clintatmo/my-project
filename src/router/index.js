@@ -6,8 +6,10 @@ import Login from '../components/authentication/Login.vue';
 import Register from '../components/authentication/Register.vue';
 import Dashboard from '../components/dashboard/Dashboard.vue';
 import Settings from '../components/settings/Settings.vue';
-import SettingsAdmin from '../components/settings/admin/SettingsAdmin.vue';
-import SettingsUser from '../components/settings/user/SettingsUser.vue';
+import SettingsModules from '../components/settings/modules/SettingsModules.vue';
+import SettingsPrivileges from '../components/settings/privileges/SettingsPrivileges.vue';
+import SettingsRoles from '../components/settings/roles/SettingsRoles.vue';
+import SettingsUsers from '../components/settings/users/SettingsUsers.vue';
 import NewsFeed from '../components/news-feed/NewsFeed.vue';
 import NewsFeedNew from '../components/news-feed/new/NewsFeedNew.vue';
 import NewsFeedHistory from '../components/news-feed/history/NewsFeedHistory.vue';
@@ -23,18 +25,28 @@ export default new Router({
       children: [
         {
           path: 'settings',
-          redirect: 'settings/user',
+          redirect: 'settings/users',
           component: Settings,
           children: [{
-            path: 'admin',
-            component: SettingsAdmin,
+            path: 'modules',
+            component: SettingsModules,
             meta: { requiresAuth: true }
           },
-            {
-              path: 'user',
-              component: SettingsUser,
-              meta: { requiresAuth: true }
-            }]
+          {
+            path: 'privileges',
+            component: SettingsPrivileges,
+            meta: { requiresAuth: true }
+          },
+          {
+            path: 'roles',
+            component: SettingsRoles,
+            meta: { requiresAuth: true }
+          },
+          {
+            path: 'users',
+            component: SettingsUsers,
+            meta: { requiresAuth: true }
+          },]
         },
         {
           path: 'news-feed',
