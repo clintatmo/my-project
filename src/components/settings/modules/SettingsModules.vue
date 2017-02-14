@@ -1,11 +1,11 @@
 <template>
-  <div id="settings-admin">
+  <div id="settings-modules">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Modules</h3>
       </div>
       <div class="panel-body">
-        <h1>MODULES</h1>
+        <settings-modules-vuetable></settings-modules-vuetable>
       </div>
     </div>
 
@@ -14,7 +14,11 @@
 
 <script>
 
+  import Vue from 'vue'
   import Sidebar from 'components/dashboard/Sidebar.vue';
+  import SettingsModulesVuetable from 'components/settings/modules/SettingsModulesVuetable'
+
+  Vue.component('settings-modules-vuetable', SettingsModulesVuetable)
 
   export default {
     name: 'settings-modules',
@@ -29,7 +33,10 @@
   }
 </script>
 
-<style scoped>
+<style>
 
+  table.vuetable {
+    text-align: left;
+  }
 
 </style>
