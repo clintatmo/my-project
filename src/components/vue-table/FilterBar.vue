@@ -3,7 +3,7 @@
     <div class="form-inline">
       <div class="form-group">
         <label>Search for:</label>
-        <input type="text" v-model="filterText" class="form-control" @keyup.enter="doFilter" placeholder="name, nickname, or email">
+        <input type="text" v-model="filterText" class="form-control" @keyup.enter="doFilter" placeholder="name, description">
         <button class="btn btn-primary" @click="doFilter">Go</button>
         <button class="btn btn-default" @click="resetFilter">Reset</button>
       </div>

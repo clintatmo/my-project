@@ -5,6 +5,7 @@
       api-url="http://localhost:4500/api/module"
       :fields="fields"
       :css="css"
+      :data-path="dataPath"
       pagination-path=""
       :per-page="20"
       :multi-sort="true"
@@ -12,6 +13,7 @@
       :sort-order="sortOrder"
       detail-row-component="my-detail-row"
       :append-params="moreParams"
+      :query-params="queryParams"
       @vuetable:cell-clicked="onCellClicked"
       @vuetable:pagination-data="onPaginationData">
     </vuetable>
@@ -80,43 +82,22 @@ export default {
           dataClass: 'text-center',
         },
         {
+          name: 'id',
+          sortField: 'id'
+        },
+        {
           name: 'name',
           sortField: 'name'
         },
         {
-          name: 'email',
-          sortField: 'email'
+          name: 'description',
+          sortField: 'description'
         },
         {
-          name: 'age',
-          sortField: 'birthdate',
+          name: 'deleted',
+          sortField: 'deleted',
+          titleClass: 'text-center',
           dataClass: 'text-center'
-        },
-        {
-          name: 'birthdate',
-          sortField: 'birthdate',
-          titleClass: 'text-center',
-          dataClass: 'text-center',
-          callback: 'formatDate|DD-MM-YYYY'
-        },
-        {
-          name: 'nickname',
-          sortField: 'nickname',
-          callback: 'allcap'
-        },
-        {
-          name: 'gender',
-          sortField: 'gender',
-          titleClass: 'text-center',
-          dataClass: 'text-center',
-          callback: 'genderLabel'
-        },
-        {
-          name: 'salary',
-          sortField: 'salary',
-          titleClass: 'text-center',
-          dataClass: 'text-right',
-          callback: 'formatNumber',
         },
         {
           name: '__component:custom-actions',
@@ -127,12 +108,18 @@ export default {
       ],
       sortOrder: [
         {
-          field: 'email',
-          sortField: 'email',
-          direction: 'asc'
+          field: 'name',
+          sortField: 'name',
+          direction: ''
         }
       ],
-      moreParams: {}
+      moreParams: {},
+      queryParams: {
+        sort: 'sort',
+        page: 'page',
+        perPage: 'size'
+      },
+      dataPath: 'content'
   	}
   },
   methods: {

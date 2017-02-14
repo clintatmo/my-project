@@ -5,20 +5,16 @@
         <span>{{rowData.name}}</span>
       </div>
       <div class="inline field">
-        <label>Email: </label>
-        <span>{{rowData.email}}</span>
+        <label>Description: </label>
+        <span>{{rowData.description}}</span>
       </div>
       <div class="inline field">
-        <label>Nickname: </label>
-        <span>{{rowData.nickname}}</span>
+        <label>Id: </label>
+        <span>{{rowData.id}}</span>
       </div>
       <div class="inline field">
-        <label>Birthdate: </label>
-        <span>{{rowData.birthdate}}</span>
-      </div>
-      <div class="inline field">
-        <label>Gender: </label>
-        <span>{{rowData.gender}}</span>
+        <label>Deleted: </label>
+        <span>{{rowData.deleted}}</span>
       </div>
     </div>
   </template>
