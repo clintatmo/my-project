@@ -5,7 +5,7 @@
         <h3 class="panel-title">Modules</h3>
       </div>
       <div class="panel-body">
-        <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
+        <v-server-table url="/api/module" :columns="columns" :options="options"></v-server-table>
       </div>
     </div>
 
@@ -22,21 +22,30 @@
     components:[{
       sidebar: Sidebar
     }],
+    created: function () {
+        this.loadData();
+    },
     data: function () {
       return {
-        columns:['id','name','age'],
-        tableData: [
-          {id:1, name:"John",age:"20"},
-          {id:2, name:"Jane",age:"24"},
-          {id:3, name:"Susan",age:"16"},
-          {id:4, name:"Chris",age:"55"},
-          {id:5, name:"Dan",age:"40"}
-        ],
+        columns:['id','name','description', 'deleted'],
         options: {
           // see the options API
-          childRow:true
+          responseAdapter: function(resp) {
+              return {
+              data: resp,
+              count: 2
+            }
+          }
         }
       }
+    },
+    methods:{
+        loadData: function () {
+          this.$http.get("/api/module")
+            .then(function (res) {
+              this.tableData = res.data.content;
+            })
+        }
     }
   }
 </script>
