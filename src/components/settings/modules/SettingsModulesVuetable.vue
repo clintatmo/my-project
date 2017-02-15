@@ -2,11 +2,11 @@
   <div>
     <filter-bar></filter-bar>
     <vuetable ref="vuetable"
-      api-url="http://localhost:4500/api/module"
+      api-url="/api/module"
       :fields="fields"
       :css="css"
-      :data-path="dataPath"
-      pagination-path=""
+      data-path="data.content"
+      pagination-path="data"
       :per-page="20"
       :multi-sort="true"
       multi-sort-key="ctrl"
@@ -110,19 +110,39 @@ export default {
         {
           field: 'name',
           sortField: 'name',
-          direction: ''
+          direction: 'asc'
         }
       ],
-      moreParams: {},
+      moreParams: {
+          page: 0
+      },
       queryParams: {
         sort: 'sort',
         page: 'page',
         perPage: 'size'
-      },
-      dataPath: 'content'
+      }
   	}
   },
   methods: {
+    transform: function(data) {
+      var transformed = {}
+
+      //console.log(data.data)
+
+      transformed.pagination = {
+        total: data.data.totalElements,
+        per_page: data.data.size,
+        current_page: data.data.number
+      }
+
+//      for (var i=0; i < data.length; i++) {
+//        transformed.data.push({
+//          id: data[i].id,
+//          fullname: data[i].name,
+//          email: data[i].email
+//        })
+//      }
+    },
     allcap (value) {
       return value.toUpperCase()
     },
@@ -149,7 +169,7 @@ export default {
     onCellClicked (data, field, event) {
       console.log('cellClicked: ', field.name)
       this.$refs.vuetable.toggleDetailRow(data.id)
-    },
+    }
   },
   events: {
     'filter-set' (filterText) {

@@ -49,8 +49,11 @@ Vue.http.interceptors.push(function(request, next) {
     request.url = process.env.API + request.url;
 
     var token = Vue.auth.getToken();
-    if (token)
+    if (token){
       request.headers.set('Authorization', 'Bearer ' + token);
+    }
+
+
   }
 
   next(function(response) {
@@ -61,6 +64,15 @@ Vue.http.interceptors.push(function(request, next) {
       /*response.body.errors.forEach(function (e) {
         alertify.error(e);
       });*/
+    }
+
+    if (response.status == 401) {
+
+        Vue.auth.destroyToken();
+        next({
+          path: '/auth/login'
+        });
+        alertify.error(response.data.error_description);
     }
   });
 });
@@ -79,7 +91,6 @@ Router.beforeEach(function (to, from, next)  {
     && !Vue.auth.loggedIn())
   {
 
-    console.log(Vue.auth.loggedIn());
     next({
       path: '/auth/login'
     });

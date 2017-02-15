@@ -313,6 +313,8 @@ export default {
 
       this.httpOptions['params'] = this.getAllQueryParams()
 
+      //console.log(this.httpOptions)
+
       Vue.http.get(this.apiUrl, this.httpOptions).then(
         success,
         failed
@@ -321,10 +323,10 @@ export default {
     loadSuccess: function(response) {
       this.fireEvent('load-success', response)
 
-      let body = this.transform(response.body)
+      let body = this.transform(response)
 
-      this.tableData = this.getObjectValue(body, this.dataPath, null)
-      this.tablePagination = this.getObjectValue(body, this.paginationPath, null)
+      this.tableData = this.getObjectValue(response, this.dataPath, null)
+      this.tablePagination = this.getObjectValue(response, this.paginationPath, null)
 
       if (this.tablePagination === null) {
         this.warn('vuetable: pagination-path "' + this.paginationPath + '" not found. '
@@ -393,8 +395,12 @@ export default {
           ? this.sortOrder[i].field
           : this.sortOrder[i].sortField;
 
-        result += fieldName + '|' + this.sortOrder[i].direction + ((i+1) < this.sortOrder.length ? ',' : '');
+        //result += fieldName + '|' + this.sortOrder[i].direction + ((i+1) < this.sortOrder.length ? ',' : '');
+        result += fieldName + '&' + fieldName + '.dir=' + this.sortOrder[i].direction;
+        //result += fieldName;
       }
+
+      console.log(result)
 
       return result;
     },
@@ -550,6 +556,7 @@ export default {
       if (path.trim() != '') {
         let keys = path.split('.')
         keys.forEach(function(key) {
+
           if (obj !== null && typeof obj[key] !== 'undefined' && obj[key] !== null) {
             obj = obj[key]
           } else {
