@@ -8,12 +8,13 @@ import Vuex from 'vuex';
 import vuexI18n from 'vuex-i18n';
 import Auth from './plugins/AuthPlugin';
 import Store from './store/VuexStore';
+import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 
 
 Vue.use(VueResource);
 Vue.use(Vuex);
 Vue.use(Auth);
-
+Vue.use(ClientTable);
 // initialize the vuex store using the vuex module. note that you can change the
 //  name of the module if you wish
 const store = new Vuex.Store({
