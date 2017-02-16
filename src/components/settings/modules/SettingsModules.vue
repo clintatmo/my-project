@@ -30,14 +30,21 @@
     data: function () {
       return {
         columns:['id','name','description', 'deleted'],
-        tableData:[
-//            {id:0, name:'default', description:'default', deleted:false},
-//            {id:1, name:'default', description:'default', deleted:false}
-
-        ],
+        tableData:[],
         options: {
           // see the options API
-          perPage: 25
+          perPage: 2,
+          texts:{
+            count:'Showing {from} to {to} of {count} records|{count} records|One record',
+            filter:'',
+            filterPlaceholder:'Search..',
+            limit:'Records:',
+            noResults:'No matching records',
+            page:'Page:', // for dropdown pagination
+            filterBy: 'Filter by {column}', // Placeholder for search fields when filtering by column
+            loading:'Loading...', // First request to server
+            defaultOption:'Select {column}' // default option for list filters
+          }
 
         }
       }
