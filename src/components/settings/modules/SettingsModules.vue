@@ -7,6 +7,47 @@
       <div class="panel-body">
         <div id="vue-tables-options">
           <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
+          <div class="well">
+            <form class="form-horizontal">
+              <fieldset>
+
+                <!-- Form Name -->
+                <legend>Edit</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <div class="col-md-5">
+                    <input  type="hidden" class="form-control input-md" v-model="module.id">
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <div class="col-md-5">
+                    <input  type="text" placeholder="Name" class="form-control input-md" v-model="module.name">
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <div class="col-md-5">
+                    <input type="text" placeholder="Description" class="form-control input-md" v-model="module.description">
+                  </div>
+                </div>
+
+                <legend></legend>
+
+                <!-- Button -->
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <button id="singlebutton" name="singlebutton" class="btn pull-right btn-primary">Save</button>
+                  </div>
+                </div>
+
+
+              </fieldset>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -19,17 +60,46 @@
   import Vue from 'vue'
   import Sidebar from 'components/dashboard/Sidebar.vue';
 
+  Vue.component('deleteModule', {
+    props:['data'],
+    template:`<button @click='erase' class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-trash"></i></button>`,
+    methods:{
+      erase() {
+        let id = this.data.id;
+        // delete the item
+        console.log(id);
+      }
+    }
+  });
+
+  Vue.component('editModule', {
+    props:['data'],
+    template:`<button @click='edit' class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>`,
+    methods:{
+      edit() {
+        let id = this.data.id;
+        // delete the item
+        console.log(this.$parent);
+      }
+    }
+  });
+
   export default {
     name: 'settings-modules',
     components:[{
       sidebar: Sidebar
     }],
+    ready: function() {
+      this.$on('vue-tables.row-click', function(row) {
+        console.log(row);
+      });
+    },
     created: function () {
         this.loadData();
     },
     data: function () {
       return {
-        columns:['id','name','description', 'deleted'],
+        columns:['id','name','description', 'edit', 'erase'],
         tableData:[],
         options: {
           // see the options API
@@ -44,8 +114,31 @@
             filterBy: 'Filter by {column}', // Placeholder for search fields when filtering by column
             loading:'Loading...', // First request to server
             defaultOption:'Select {column}' // default option for list filters
+          },
+          compileTemplates: true,
+          filterByColumn: false,
+          datepickerOptions: {
+            showDropdowns: true
+          },
+          headings: {
+            id: 'Id',
+            name: 'Name',
+            description: 'Description',
+            deleted: 'Deleted',
+            edit: 'Edit',
+            erase: 'Delete'
+          },
+          templates: {
+            edit: 'editModule',
+            erase: 'deleteModule'
           }
 
+        },
+        module: {
+          id:0,
+          name:"",
+          description:"",
+          deleted:false
         }
       }
     },
@@ -56,6 +149,9 @@
                 //console.log(res);
               this.tableData = res.data;
             })
+        },
+        editModule: function (obj) {
+          console.log(obj);
         }
     }
   }
