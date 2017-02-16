@@ -15,7 +15,7 @@ Vue.use(VueResource);
 Vue.use(Vuex);
 Vue.use(Auth);
 Vue.use(ClientTable);
-Vue.use(ServerTable);
+//Vue.use(ServerTable);
 // initialize the vuex store using the vuex module. note that you can change the
 //  name of the module if you wish
 const store = new Vuex.Store({

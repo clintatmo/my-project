@@ -5,7 +5,9 @@
         <h3 class="panel-title">Modules</h3>
       </div>
       <div class="panel-body">
-        <v-server-table url="/api/module" :columns="columns" :options="options"></v-server-table>
+        <div id="vue-tables-options">
+          <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
+        </div>
       </div>
     </div>
 
@@ -28,14 +30,15 @@
     data: function () {
       return {
         columns:['id','name','description', 'deleted'],
+        tableData:[
+//            {id:0, name:'default', description:'default', deleted:false},
+//            {id:1, name:'default', description:'default', deleted:false}
+
+        ],
         options: {
           // see the options API
-          responseAdapter: function(resp) {
-              return {
-              data: resp,
-              count: 2
-            }
-          }
+          perPage: 25
+
         }
       }
     },
@@ -43,7 +46,8 @@
         loadData: function () {
           this.$http.get("/api/module")
             .then(function (res) {
-              this.tableData = res.data.content;
+                //console.log(res);
+              this.tableData = res.data;
             })
         }
     }
@@ -52,8 +56,24 @@
 
 <style>
 
-  table.vuetable {
+  #vue-tables-options {
+    text-align: center;
+  }
+
+  table {
     text-align: left;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  thead tr:nth-child(2) th {
+    font-weight: normal;
+  }
+
+  .VueTables__sortable {
+    cursor: pointer;
   }
 
 </style>
