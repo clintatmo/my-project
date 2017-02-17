@@ -1,4 +1,4 @@
-<template>
+<template xmlns:>
   <div id="settings-modules">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -12,7 +12,7 @@
               <fieldset>
 
                 <!-- Form Name -->
-                <legend>Edit</legend>
+                <legend>Module details</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
@@ -23,15 +23,17 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <div class="col-md-5">
-                    <input  type="text" placeholder="Name" class="form-control input-md" v-model="module.name">
+                  <div class="col-xs-5 col-md-5">
+                    <label for="name" class="control-label">Name</label>
+                    <input id="name"  type="text" placeholder="Name" class="form-control input-md" v-model="module.name">
                   </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <div class="col-md-5">
-                    <input type="text" placeholder="Description" class="form-control input-md" v-model="module.description">
+                  <div class="col-xs-5 col-md-5">
+                    <label for="description" class="control-label">Description</label>
+                    <input id="description"  type="text" placeholder="Description" class="form-control input-md" v-model="module.description">
                   </div>
                 </div>
 
@@ -40,7 +42,7 @@
                 <!-- Button -->
                 <div class="form-group">
                   <div class="col-md-12">
-                    <button id="singlebutton" name="singlebutton" class="btn pull-right btn-primary">Save</button>
+                    <button id="singlebutton" name="singlebutton" @click='updateModule' class="btn pull-right btn-primary">Save</button>
                   </div>
                 </div>
 
@@ -77,9 +79,7 @@
     template:`<button @click='edit' class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>`,
     methods:{
       edit() {
-        let id = this.data.id;
-        // delete the item
-        console.log(this.$parent);
+        this.$parent.$options.parent.editModule(this.data);
       }
     }
   });
@@ -151,7 +151,15 @@
             })
         },
         editModule: function (obj) {
-          console.log(obj);
+          this.module = obj;
+        },
+        updateModule: function () {
+          this.$http.put("/api/module/"+ this.module.id, this.module)
+            .then(function (res) {
+              //console.log(res);
+              this.loadData();
+              alertify.success('Saved!');
+            })
         }
     }
   }

@@ -41,9 +41,10 @@ alertify.defaults.notifier.position = 'top-right';
 var base64 = require('base-64');
 
 Vue.http.headers.common['Authorization'] = 'Basic '+base64.encode(process.env.AUTH_USERNAME+":"+process.env.AUTH_PASSWORD);
+Vue.http.headers.common['Content-Type'] = 'application/json';
 
 Vue.http.options.xhr = {withCredentials: true};
-Vue.http.options.emulateJSON = true;
+//Vue.http.options.emulateJSON = true;
 
 Vue.http.interceptors.push(function(request, next) {
 
