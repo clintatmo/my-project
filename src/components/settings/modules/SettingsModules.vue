@@ -41,8 +41,9 @@
 
                 <!-- Button -->
                 <div class="form-group">
-                  <div class="col-md-12">
-                    <button id="singlebutton" name="singlebutton" @click='updateModule' class="btn pull-right btn-primary">Save</button>
+                  <div class="btn-group pull-right">
+                    <a id="btnClearModuleForm" @click='clearForm' class="btn btn-primary">New</a>
+                    <a id="btnSaveModule" @click='updateModule' class="btn btn-primary">Save</a>
                   </div>
                 </div>
 
@@ -79,7 +80,7 @@
     template:`<button @click='edit' class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>`,
     methods:{
       edit() {
-        this.$parent.$options.parent.editModule(this.data);
+        this.$parent.$options.parent.loadFormWithData(this.data);
       }
     }
   });
@@ -135,7 +136,7 @@
 
         },
         module: {
-          id:0,
+          id:null,
           name:"",
           description:"",
           deleted:false
@@ -150,14 +151,31 @@
               this.tableData = res.data;
             })
         },
-        editModule: function (obj) {
+        loadFormWithData: function (obj) {
           this.module = obj;
+        },
+        clearForm: function () {
+          this.module= {
+            id:0,
+            name:"",
+            description:"",
+            deleted:false
+          };
         },
         updateModule: function () {
           this.$http.put("/api/module/"+ this.module.id, this.module)
             .then(function (res) {
               //console.log(res);
               this.loadData();
+              alertify.success('Saved!');
+            })
+        },
+        createModule: function () {
+          this.$http.post("/api/module", this.module)
+            .then(function (res) {
+              //console.log(res);
+              this.loadData();
+              this.module = {};
               alertify.success('Saved!');
             })
         }

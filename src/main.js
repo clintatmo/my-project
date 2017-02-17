@@ -62,11 +62,10 @@ Vue.http.interceptors.push(function(request, next) {
   next(function(response) {
     if (response.status == 400) {
 
-        alertify.error(response.data.error_description);
+      if(response.data.error_description) alertify.error(response.data.error_description);
+      if(response.data.error) alertify.error(response.data.error);
+      if(response.data.message) alertify.error(response.data.message);
 
-      /*response.body.errors.forEach(function (e) {
-        alertify.error(e);
-      });*/
     }
 
     if (response.status == 401) {
