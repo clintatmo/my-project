@@ -61,23 +61,25 @@ Vue.http.interceptors.push(function(request, next) {
 
   next(function(response) {
     if (response.status == 400) {
-
-      if(response.data.error_description) alertify.error(response.data.error_description);
-      if(response.data.error) alertify.error(response.data.error);
-      if(response.data.message) alertify.error(response.data.message);
-
+      checkErrorMessages(response);
     }
 
     if (response.status == 401) {
 
-        Vue.auth.destroyToken();
-        next({
-          path: '/auth/login'
-        });
-        alertify.error(response.data.error_description);
+      Vue.auth.destroyToken();
+      next({
+        path: '/auth/login'
+      });
+      checkErrorMessages(response);
     }
   });
 });
+
+function checkErrorMessages(response) {
+  if(response.data.error_description) alertify.error(response.data.error_description);
+  if(response.data.error) alertify.error(response.data.error);
+  if(response.data.message) alertify.error(response.data.message);
+}
 
 //configure route guards
 Router.beforeEach(function (to, from, next)  {
