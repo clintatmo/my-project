@@ -68,9 +68,7 @@
     template:`<button @click='erase' class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-trash"></i></button>`,
     methods:{
       erase() {
-        let id = this.data.id;
-        // delete the item
-        console.log(id);
+        this.$parent.$options.parent.deleteModule(this.data.id);
       }
     }
   });
@@ -167,7 +165,7 @@
             .then(function (res) {
               //console.log(res);
               this.loadData();
-              alertify.success('Saved!');
+              alertify.success('Updated!');
             })
         },
         createModule: function () {
@@ -177,6 +175,14 @@
               this.loadData();
               this.module = {};
               alertify.success('Saved!');
+            })
+        },
+        deleteModule: function (id) {
+          this.$http.delete("/api/module/"+ id)
+            .then(function (res) {
+              //console.log(res);
+              this.loadData();
+              alertify.success('Deleted!');
             })
         }
     }
