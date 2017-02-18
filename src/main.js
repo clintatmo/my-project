@@ -60,7 +60,7 @@ Vue.http.interceptors.push(function(request, next) {
   }
 
   next(function(response) {
-    if (response.status == 400) {
+    if (response.status == 400 || response.status == 500) {
       checkErrorMessages(response);
     }
 

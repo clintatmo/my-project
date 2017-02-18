@@ -12,7 +12,7 @@
               <fieldset>
 
                 <!-- Form Name -->
-                <legend>Module details</legend>
+                <legend><strong>{{formTitle}}</strong></legend>
 
                 <!-- Text input-->
                 <div class="form-group">
@@ -23,17 +23,17 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <div class="col-xs-5 col-md-5">
-                    <label for="name" class="control-label">Name</label>
-                    <input id="name"  type="text" placeholder="Name" class="form-control input-md" v-model="module.name">
+                  <label for="name" class="col-md-2 control-label">Name</label>
+                  <div class="col-md-5">
+                    <input id="name"  type="text" placeholder="Name" class="form-control input-md" v-model="module.name" required>
                   </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <div class="col-xs-5 col-md-5">
-                    <label for="description" class="control-label">Description</label>
-                    <input id="description"  type="text" placeholder="Description" class="form-control input-md" v-model="module.description">
+                  <label for="description" class="col-md-2 control-label">Description</label>
+                  <div class="col-md-5">
+                    <input id="description"  type="text" placeholder="Description" class="form-control input-md" v-model="module.description" required>
                   </div>
                 </div>
 
@@ -133,6 +133,7 @@
           }
 
         },
+        formTitle:'Module details',
         module: {
           id:null,
           name:"",
@@ -150,23 +151,33 @@
             })
         },
         loadFormWithData: function (obj) {
+          this.formTitle = 'Edit module';
           this.module = obj;
         },
         clearForm: function () {
           this.module= {
-            id:0,
+            id:null,
             name:"",
             description:"",
             deleted:false
           };
+
+          this.formTitle = 'New module';
         },
         updateModule: function () {
-          this.$http.put("/api/module/"+ this.module.id, this.module)
-            .then(function (res) {
-              //console.log(res);
-              this.loadData();
-              alertify.success('Updated!');
-            })
+
+          if(this.module.id){
+            this.$http.put("/api/module/"+ this.module.id, this.module)
+              .then(function (res) {
+                //console.log(res);
+                this.loadData();
+                alertify.success('Updated!');
+              })
+          }else{
+              this.createModule();
+          }
+
+
         },
         createModule: function () {
           this.$http.post("/api/module", this.module)
