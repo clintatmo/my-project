@@ -5,33 +5,39 @@ import App from './App'
 import Router from './router'
 import VueResource from 'vue-resource';
 import Vuex from 'vuex';
-import vuexI18n from 'vuex-i18n';
+import VueI18n from 'vue-i18n';
 import Auth from './plugins/AuthPlugin';
 import Store from './store/VuexStore';
-import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+import Element from 'element-ui';
+import enLocale from 'element-ui/lib/locale/lang/en'
+//import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 
 
 Vue.use(VueResource);
 Vue.use(Vuex);
 Vue.use(Auth);
-Vue.use(ClientTable);
+//Vue.use(ClientTable);
+Vue.use(VueI18n);
+Vue.use(Element);
+Vue.config.lang = 'en';
+Vue.locale('en', enLocale);
 //Vue.use(ServerTable);
 // initialize the vuex store using the vuex module. note that you can change the
 //  name of the module if you wish
-const store = new Vuex.Store({
-  modules: {
-    i18n: vuexI18n.store
-  }
-});
-
-Vue.use(vuexI18n.plugin, store);
-
-// add translations directly to the application
-Vue.i18n.add('en', require('./assets/i18n/en-US.json'));
-Vue.i18n.add('nl', require('./assets/i18n/nl-NL.json'));
-
-// set the start locale to use
-Vue.i18n.set('en');
+// const store = new Vuex.Store({
+//   modules: {
+//     i18n: vuexI18n.store
+//   }
+// });
+//
+// Vue.use(vuexI18n.plugin, store);
+//
+// // add translations directly to the application
+// Vue.i18n.add('en', require('./assets/i18n/en-US.json'));
+// Vue.i18n.add('nl', require('./assets/i18n/nl-NL.json'));
+//
+// // set the start locale to use
+// Vue.i18n.set('en');
 
 
 //configure alertify defaults

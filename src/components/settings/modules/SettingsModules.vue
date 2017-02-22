@@ -6,7 +6,33 @@
       </div>
       <div class="panel-body">
         <div id="vue-tables-options">
-          <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
+          <!--<v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>-->
+          <el-table
+            :data="tableData"
+            border
+            stripe
+            filter
+            style="width: 100%">
+            <el-table-column
+              prop="id"
+              label="Id">
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="Name">
+            </el-table-column>
+            <el-table-column
+              prop="description"
+              label="Description">
+            </el-table-column>
+            <el-table-column
+              label="Operations">
+              <template scope="scope">
+                <el-button @click="loadFormWithData(scope.row)" type="text" size="small">Edit</el-button>
+                <el-button @click="deleteModule(scope.row)" type="text" size="small">Delete</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
           <div class="well">
             <form class="form-horizontal">
               <fieldset>
@@ -63,6 +89,10 @@
   import Vue from 'vue'
   import Sidebar from 'components/dashboard/Sidebar.vue';
 
+  Vue.component('modal', {
+    template: '#modal-template'
+  })
+
   Vue.component('deleteModule', {
     props:['data'],
     template:`<button @click='erase' class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-trash"></i></button>`,
@@ -88,51 +118,12 @@
     components:[{
       sidebar: Sidebar
     }],
-    ready: function() {
-      this.$on('vue-tables.row-click', function(row) {
-        console.log(row);
-      });
-    },
     created: function () {
         this.loadData();
     },
     data: function () {
       return {
-        columns:['id','name','description', 'edit', 'erase'],
         tableData:[],
-        options: {
-          // see the options API
-          perPage: 2,
-          texts:{
-            count:'Showing {from} to {to} of {count} records|{count} records|One record',
-            filter:'',
-            filterPlaceholder:'Search..',
-            limit:'Records:',
-            noResults:'No matching records',
-            page:'Page:', // for dropdown pagination
-            filterBy: 'Filter by {column}', // Placeholder for search fields when filtering by column
-            loading:'Loading...', // First request to server
-            defaultOption:'Select {column}' // default option for list filters
-          },
-          compileTemplates: true,
-          filterByColumn: false,
-          datepickerOptions: {
-            showDropdowns: true
-          },
-          headings: {
-            id: 'Id',
-            name: 'Name',
-            description: 'Description',
-            deleted: 'Deleted',
-            edit: 'Edit',
-            erase: 'Delete'
-          },
-          templates: {
-            edit: 'editModule',
-            erase: 'deleteModule'
-          }
-
-        },
         formTitle:'Module details',
         module: {
           id:null,
@@ -188,8 +179,8 @@
               alertify.success('Saved!');
             })
         },
-        deleteModule: function (id) {
-          this.$http.delete("/api/module/"+ id)
+        deleteModule: function (obj) {
+          this.$http.delete("/api/module/"+ obj.id)
             .then(function (res) {
               //console.log(res);
               this.loadData();
@@ -202,24 +193,5 @@
 
 <style>
 
-  #vue-tables-options {
-    text-align: center;
-  }
-
-  table {
-    text-align: left;
-  }
-
-  h2 {
-    margin-bottom: 10px;
-  }
-
-  thead tr:nth-child(2) th {
-    font-weight: normal;
-  }
-
-  .VueTables__sortable {
-    cursor: pointer;
-  }
 
 </style>
