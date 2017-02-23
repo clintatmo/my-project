@@ -52,14 +52,18 @@ Vue.http.interceptors.push(function(request, next) {
 
     if (response.status == 401) {
 
+      checkErrorMessagesAndNotify(response);
       Vue.auth.destroyToken();
-      next({
-        path: '/auth/login'
-      });
-      checkErrorMessages(response);
+      Router.go('/auth/login');
     }
   });
 });
+
+function checkErrorMessagesAndNotify(response) {
+  if(response.data.error_description) alertify.notify(response.data.error_description, 'error', 60, function(){});
+  if(response.data.error) alertify.notify(response.data.error, 'error', 60, function(){});
+  if(response.data.message) alertify.notify(response.data.message, 'error', 60, function(){});
+}
 
 function checkErrorMessages(response) {
   if(response.data.error_description) alertify.error(response.data.error_description);

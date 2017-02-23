@@ -1,20 +1,28 @@
 <template>
     <div>
-        <h3 class="text-center">Login</h3>
+      <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Login</h3>
+      </div>
+      <div class="panel-body">
 
-        <input type="text" class="form-control m-b-15" placeholder="Username"
-               v-model="user.username">
-        <input type="password" class="form-control" placeholder="Password"
-               v-model="user.password">
-
-        <hr>
-
-        <button class="btn btn-lg btn-primary btn-block m-b-15"
-            @click="login">Sign in</button>
-
-        <p class="text-center">
-            Don't have an account? <router-link to="/auth/register">Sign up!</router-link>
-        </p>
+        <el-form label-position="left" :model="user" :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+          <el-form-item label="Username" prop="username">
+            <el-input v-model="user.username"></el-input>
+          </el-form-item>
+          <el-form-item label="Password" prop="password">
+            <el-input type="password" v-model="user.password" auto-complete="off"></el-input>
+          </el-form-item>
+          <hr>
+          <el-form-item>
+            <el-button type="primary" @click="login">Submit</el-button>
+            <!--<p class="">-->
+              <!--Don't have an account? <router-link to="/auth/register">Sign up!</router-link>-->
+            <!--</p>-->
+          </el-form-item>
+        </el-form>
+      </div>
+      </div>
     </div>
 </template>
 

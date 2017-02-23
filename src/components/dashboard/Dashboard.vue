@@ -18,7 +18,7 @@
         </el-menu>
         </el-col>
       </el-row>
-      <el-row style="margin-top: 5px">
+      <el-row style="margin-top: 10px">
         <el-col :span="24">
 
         </el-col>

@@ -33,49 +33,28 @@
               </template>
             </el-table-column>
           </el-table>
+
+          <hr>
+
           <div class="well">
-            <form class="form-horizontal">
-              <fieldset>
 
-                <!-- Form Name -->
-                <legend><strong>{{formTitle}}</strong></legend>
+            <!-- Form Name -->
+            <legend><strong>{{formTitle}}</strong></legend>
 
-                <!-- Text input-->
-                <div class="form-group">
-                  <div class="col-md-5">
-                    <input  type="hidden" class="form-control input-md" v-model="module.id">
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label for="name" class="col-md-2 control-label">Name</label>
-                  <div class="col-md-5">
-                    <input id="name"  type="text" placeholder="Name" class="form-control input-md" v-model="module.name" required>
-                  </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label for="description" class="col-md-2 control-label">Description</label>
-                  <div class="col-md-5">
-                    <input id="description"  type="text" placeholder="Description" class="form-control input-md" v-model="module.description" required>
-                  </div>
-                </div>
-
-                <legend></legend>
-
-                <!-- Button -->
-                <div class="form-group">
-                  <div class="btn-group pull-right">
-                    <a id="btnClearModuleForm" @click='clearForm' class="btn btn-primary">New</a>
-                    <a id="btnSaveModule" @click='updateModule' class="btn btn-primary">Save</a>
-                  </div>
-                </div>
-
-
-              </fieldset>
-            </form>
+            <el-form ref="form" label-position="left" :model="module" label-width="120px">
+              <el-form-item label="Name">
+                <el-input v-model="module.name"></el-input>
+              </el-form-item>
+              <el-form-item label="Description">
+                <el-input type="textarea" v-model="module.description"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button-group>
+                  <el-button type="primary" @click="clearForm">New</el-button>
+                  <el-button type="primary" @click="updateModule">Save</el-button>
+                </el-button-group>
+              </el-form-item>
+            </el-form>
           </div>
         </div>
       </div>
@@ -125,6 +104,7 @@
       return {
         tableData:[],
         formTitle:'Module details',
+        disableForm:true,
         module: {
           id:null,
           name:"",
@@ -144,6 +124,7 @@
         loadFormWithData: function (obj) {
           this.formTitle = 'Edit module';
           this.module = obj;
+          this.disableForm = false;
         },
         clearForm: function () {
           this.module= {
@@ -154,6 +135,8 @@
           };
 
           this.formTitle = 'New module';
+          this.disableForm = false;
+
         },
         updateModule: function () {
 
