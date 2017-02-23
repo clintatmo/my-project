@@ -6,7 +6,6 @@
       </div>
       <div class="panel-body">
         <div id="vue-tables-options">
-          <!--<v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>-->
           <el-table
             :data="tableData"
             border
@@ -28,19 +27,15 @@
             <el-table-column
               label="Operations">
               <template scope="scope">
-                <el-button @click="loadFormWithData(scope.row)" type="text" size="small">Edit</el-button>
+                <el-button @click="loadFormWithData(scope.row), dialogFormVisible = true" type="text" size="small">Edit</el-button>
+                <el-button @click="dialogFormVisible = true, clearForm" type="text" size="small">New</el-button>
                 <el-button @click="deleteModule(scope.row)" type="text" size="small">Delete</el-button>
               </template>
             </el-table-column>
           </el-table>
 
-          <hr>
-
-          <div class="well">
-
-            <!-- Form Name -->
-            <legend><strong>{{formTitle}}</strong></legend>
-
+          <el-dialog :title="formTitle" v-model="dialogFormVisible">
+            <hr>
             <el-form ref="form" label-position="left" :model="module" label-width="120px">
               <el-form-item label="Name">
                 <el-input v-model="module.name"></el-input>
@@ -48,14 +43,17 @@
               <el-form-item label="Description">
                 <el-input type="textarea" v-model="module.description"></el-input>
               </el-form-item>
-              <el-form-item>
-                <el-button-group>
-                  <el-button type="primary" @click="clearForm">New</el-button>
-                  <el-button type="primary" @click="updateModule">Save</el-button>
-                </el-button-group>
-              </el-form-item>
             </el-form>
-          </div>
+            <hr>
+            <span slot="footer" class="dialog-footer">
+              <el-button-group>
+                <el-button type="success" @click="clearForm">New</el-button>
+                <el-button type="primary" @click="updateModule">Save</el-button>
+                <el-button type="default" @click="dialogFormVisible = false">Cancel</el-button>
+              </el-button-group>
+            </span>
+          </el-dialog>
+
         </div>
       </div>
     </div>
@@ -105,6 +103,18 @@
         tableData:[],
         formTitle:'Module details',
         disableForm:true,
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px',
         module: {
           id:null,
           name:"",

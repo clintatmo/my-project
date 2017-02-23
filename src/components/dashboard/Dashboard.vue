@@ -2,7 +2,7 @@
     <div id="dashWrap">
       <el-row>
         <el-col :span="24">
-          <el-menu :default-active="activeIndex2" class="el-menu-demo" router="true" theme="dark" mode="horizontal" @select="handleSelect">
+          <el-menu :default-active="activeIndex2" class="el-menu-demo" :router="setRouter" theme="dark" mode="horizontal" @select="handleSelect">
           <el-menu-item index="/auth/login">iProject</el-menu-item>
           <el-menu-item index="/news-feed"><i class="fa fa-newspaper-o"></i> News feed</el-menu-item>
           <el-menu-item index="/settings"><i class="fa fa-cog"></i> Settings</el-menu-item>
@@ -41,7 +41,8 @@
           return {
             loggedIn: this.$auth.loggedIn(),
             activeIndex: '1',
-            activeIndex2: '1'
+            activeIndex2: '1',
+            setRouter: true
           }
         },
         computed: {

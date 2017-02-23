@@ -1,7 +1,7 @@
 <template>
     <div id="sidebar" class="text-center">
 
-        <el-menu default-active="1" class="el-menu-vertical-demo" router="true" theme="dark" @open="handleOpen" @close="handleClose">
+        <el-menu default-active="1" class="el-menu-vertical-demo" :router="setRouter" theme="dark" @open="handleOpen" @close="handleClose">
 
           <el-menu-item index="/news-feed/new">New</el-menu-item>
           <el-menu-item index="/news-feed/history"> History </el-menu-item>
@@ -20,6 +20,11 @@
 <script>
     export default {
       name: 'sidebar',
+      data: function () {
+        return {
+          setRouter: true
+        }
+      },
       methods: {
         logout: function () {
             this.$auth.destroyToken();

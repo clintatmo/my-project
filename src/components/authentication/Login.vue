@@ -6,7 +6,7 @@
       </div>
       <div class="panel-body">
 
-        <el-form label-position="left" :model="user" :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+        <el-form label-position="left" :model="user" ref="loginForm" label-width="120px" class="demo-ruleForm">
           <el-form-item label="Username" prop="username">
             <el-input v-model="user.username"></el-input>
           </el-form-item>
